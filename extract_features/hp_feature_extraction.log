@@ -1,0 +1,20 @@
+2025-10-04 16:51:36,036 - INFO - Comprehensive feature set loaded: ~384 features
+2025-10-04 16:51:36,037 - INFO - ================================================================================
+2025-10-04 16:51:36,037 - INFO - HIGH-PERFORMANCE TSFRESH EXTRACTOR INITIALIZED
+2025-10-04 16:51:36,037 - INFO - ================================================================================
+2025-10-04 16:51:36,037 - INFO - System: 20-core processor
+2025-10-04 16:51:36,037 - INFO - Processes: 13
+2025-10-04 16:51:36,037 - INFO - Batch size: 17
+2025-10-04 16:51:36,037 - INFO - Memory limit: 12.6 GB
+2025-10-04 16:51:36,037 - INFO - Features per curve: ~350 (ALL features)
+2025-10-04 16:51:36,037 - INFO - Memory mapping: True
+2025-10-04 16:51:36,037 - INFO - Caching enabled: True
+2025-10-04 16:51:36,037 - INFO - ================================================================================
+2025-10-04 16:51:36,045 - INFO - Found 1235 total NPZ files
+2025-10-04 16:51:36,045 - INFO - Processing 1235 remaining files
+2025-10-04 16:51:36,045 - INFO - Processing 73 optimized batches of size 17
+2025-10-04 16:51:40,413 - ERROR - Error processing batch 0: ("Can't pickle <class 'NoneType'>: it's not found as builtins.NoneType", 'PicklingError while hashing {\'self\': <__mp_main__.HighPerformanceExoplanetExtractor object at 0x00000272E4B31A90>, \'npz_path_str\': \'D:\\\\featurestest1\\\\extract_features\\\\lightcurve_ultraclean_5000\\\\KIC_10004519.npz\'}: PicklingError("Can\'t pickle <class \'NoneType\'>: it\'s not found as builtins.NoneType")')
+2025-10-04 16:51:44,603 - ERROR - Error processing batch 1: ("Can't pickle <class 'NoneType'>: it's not found as builtins.NoneType", 'PicklingError while hashing {\'self\': <__mp_main__.HighPerformanceExoplanetExtractor object at 0x00000131504C1A90>, \'npz_path_str\': \'D:\\\\featurestest1\\\\extract_features\\\\lightcurve_ultraclean_5000\\\\KIC_10055126.npz\'}: PicklingError("Can\'t pickle <class \'NoneType\'>: it\'s not found as builtins.NoneType")')
+2025-10-04 16:51:48,679 - ERROR - Error processing batch 2: ("Can't pickle <class 'NoneType'>: it's not found as builtins.NoneType", 'PicklingError while hashing {\'self\': <__mp_main__.HighPerformanceExoplanetExtractor object at 0x000002A4483E1A90>, \'npz_path_str\': \'D:\\\\featurestest1\\\\extract_features\\\\lightcurve_ultraclean_5000\\\\KIC_10157458.npz\'}: PicklingError("Can\'t pickle <class \'NoneType\'>: it\'s not found as builtins.NoneType")')
+2025-10-04 16:51:52,888 - ERROR - Error processing batch 3: ("Can't pickle <class 'NoneType'>: it's not found as builtins.NoneType", 'PicklingError while hashing {\'self\': <__mp_main__.HighPerformanceExoplanetExtractor object at 0x000002D777FC1A90>, \'npz_path_str\': \'D:\\\\featurestest1\\\\extract_features\\\\lightcurve_ultraclean_5000\\\\KIC_10329835.npz\'}: PicklingError("Can\'t pickle <class \'NoneType\'>: it\'s not found as builtins.NoneType")')
+2025-10-04 16:51:57,341 - ERROR - Error processing batch 4: ("Can't pickle <class 'NoneType'>: it's not found as builtins.NoneType", 'PicklingError while hashing {\'self\': <__mp_main__.HighPerformanceExoplanetExtractor object at 0x000001CECF911A90>, \'npz_path_str\': \'D:\\\\featurestest1\\\\extract_features\\\\lightcurve_ultraclean_5000\\\\KIC_10468940.npz\'}: PicklingError("Can\'t pickle <class \'NoneType\'>: it\'s not found as builtins.NoneType")')
