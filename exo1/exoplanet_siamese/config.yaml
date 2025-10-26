@@ -1,0 +1,69 @@
+# Configuration file for Exoplanet Detection using Siamese Networks
+
+# Data paths
+data:
+  raw_data_path: "data/raw/exoTest.csv"
+  processed_dir: "data/processed/"
+  features_dir: "data/features/"
+  pairs_dir: "data/pairs/"
+
+# Preprocessing settings
+preprocessing:
+  normalization_method: "local"  # Options: standard, minmax, local
+  detrend: true
+  detrend_window: 10
+  test_size: 0.2
+  val_size: 0.1
+  random_state: 42
+
+# Feature extraction settings
+features:
+  extract_statistical: true
+  extract_shape: true
+  extract_frequency: true
+  extract_time_series: true
+  extract_transit_specific: true
+
+# Pair generation settings
+pairs:
+  method: "balanced"  # Options: balanced, random, hard
+  pairs_per_sample: 5
+  positive_ratio: 0.5
+
+# Model architecture
+model:
+  hidden_dims: [256, 128, 64]
+  embedding_dim: 32
+  dropout_rate: 0.3
+  activation: "relu"  # Options: relu, leaky_relu, elu
+
+# Training settings
+training:
+  epochs: 100
+  batch_size: 32
+  learning_rate: 0.001
+  weight_decay: 0.00001
+  margin: 1.0  # For contrastive loss
+  early_stopping_patience: 10
+  scheduler_patience: 5
+  scheduler_factor: 0.5
+
+# Evaluation settings
+evaluation:
+  distance_threshold: 0.5
+  visualize: true
+  num_reference_samples: 100
+
+# Output settings
+output:
+  models_dir: "outputs/models/"
+  logs_dir: "outputs/logs/"
+  results_dir: "outputs/results/"
+  plots_dir: "outputs/plots/"
+
+# System settings
+system:
+  seed: 42
+  device: "auto"  # Options: auto, cpu, cuda
+  num_workers: 4
+  verbose: true

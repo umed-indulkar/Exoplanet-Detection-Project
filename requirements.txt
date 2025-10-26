@@ -1,0 +1,33 @@
+# =============================================
+# requirements.txt for Siamese FCNN Exoplanet Project
+# =============================================
+# Purpose:
+#   Contains all necessary Python packages for running
+#   the Siamese Fully Connected Neural Network (FCNN) 
+#   for exoplanet detection.
+#
+# How to use:
+#   1. Save this file as 'requirements.txt' in your project folder.
+#   2. Activate your virtual environment.
+#      Example: 'source .venv/bin/activate' (Linux/Mac) or '.\.venv\Scripts\activate' (Windows)
+#   3. Install all packages by running:
+#        pip install -r requirements.txt
+
+# ------------------- Packages -------------------
+torch
+scikit-learn
+matplotlib
+numpy
+optuna
+streamlit
+# ------------------- Folder Structure -------------------
+# reshtext1/
+# ├─ .venv/ <- your virtual environment
+# ├─ dashboard/ <- nanalytic boards to see
+# ├─ data/ <- datasets / light curves
+# ├─ model/ <- your Siamese FCNN model code
+# ├─ requirements.txt
+#---------------------------------------------------------
+
+# notebooks/ <- optional Jupyter notebooks (not using here for future to be considered)
+# =============================================
