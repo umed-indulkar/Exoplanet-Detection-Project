@@ -1,0 +1,286 @@
+filename,target,label,length
+positive_0830.npz,Kepler-0830,1,0
+positive_0612.npz,Kepler-0612,1,0
+negative_0102.npz,KIC 0102,0,0
+positive_0357.npz,Kepler-0357,1,0
+positive_0778.npz,Kepler-0778,1,0
+positive_0897.npz,Kepler-0897,1,0
+negative_0004.npz,KIC 0004,0,0
+negative_0121.npz,KIC 0121,0,0
+positive_1202.npz,Kepler-1202,1,0
+positive_1128.npz,Kepler-1128,1,0
+positive_0235.npz,Kepler-0235,1,0
+negative_0243.npz,KIC 0243,0,0
+positive_1088.npz,Kepler-1088,1,0
+positive_0676.npz,Kepler-0676,1,0
+negative_0460.npz,KIC 0460,0,0
+positive_0046.npz,Kepler-0046,1,0
+negative_0337.npz,KIC 0337,0,0
+positive_0364.npz,Kepler-0364,1,0
+positive_0623.npz,Kepler-0623,1,0
+negative_0410.npz,KIC 0410,0,0
+positive_0578.npz,Kepler-0578,1,0
+positive_0418.npz,Kepler-0418,1,0
+positive_0725.npz,Kepler-0725,1,0
+positive_0926.npz,Kepler-0926,1,0
+positive_0458.npz,Kepler-0458,1,0
+negative_0387.npz,KIC 0387,0,0
+positive_1219.npz,Kepler-1219,1,0
+negative_0624.npz,KIC 0624,0,0
+positive_0248.npz,Kepler-0248,1,0
+negative_0454.npz,KIC 0454,0,0
+positive_0919.npz,Kepler-0919,1,0
+negative_0583.npz,KIC 0583,0,0
+positive_1187.npz,Kepler-1187,1,0
+positive_0242.npz,Kepler-0242,1,0
+positive_0698.npz,Kepler-0698,1,0
+negative_0205.npz,KIC 0205,0,0
+negative_0091.npz,KIC 0091,0,0
+positive_0260.npz,Kepler-0260,1,0
+positive_0373.npz,Kepler-0373,1,0
+negative_0378.npz,KIC 0378,0,0
+positive_0675.npz,Kepler-0675,1,0
+positive_0751.npz,Kepler-0751,1,0
+positive_0165.npz,Kepler-0165,1,0
+positive_0359.npz,Kepler-0359,1,0
+negative_0128.npz,KIC 0128,0,0
+positive_0460.npz,Kepler-0460,1,0
+negative_0397.npz,KIC 0397,0,0
+negative_0614.npz,KIC 0614,0,0
+positive_1199.npz,Kepler-1199,1,0
+positive_1157.npz,Kepler-1157,1,0
+positive_1151.npz,Kepler-1151,1,0
+negative_0294.npz,KIC 0294,0,0
+positive_1195.npz,Kepler-1195,1,0
+positive_0876.npz,Kepler-0876,1,0
+negative_0616.npz,KIC 0616,0,0
+negative_0206.npz,KIC 0206,0,0
+positive_0050.npz,Kepler-0050,1,0
+negative_0471.npz,KIC 0471,0,0
+positive_0996.npz,Kepler-0996,1,0
+negative_0373.npz,KIC 0373,0,0
+positive_0615.npz,Kepler-0615,1,0
+positive_0106.npz,Kepler-0106,1,0
+negative_0051.npz,KIC 0051,0,0
+positive_0517.npz,Kepler-0517,1,0
+negative_0566.npz,KIC 0566,0,0
+positive_1117.npz,Kepler-1117,1,0
+positive_0484.npz,Kepler-0484,1,0
+positive_0645.npz,Kepler-0645,1,0
+positive_1073.npz,Kepler-1073,1,0
+negative_0589.npz,KIC 0589,0,0
+positive_0872.npz,Kepler-0872,1,0
+negative_0156.npz,KIC 0156,0,0
+negative_0489.npz,KIC 0489,0,0
+positive_0580.npz,Kepler-0580,1,0
+positive_0213.npz,Kepler-0213,1,0
+positive_0125.npz,Kepler-0125,1,0
+positive_0103.npz,Kepler-0103,1,0
+positive_0082.npz,Kepler-0082,1,0
+negative_0021.npz,KIC 0021,0,0
+positive_1168.npz,Kepler-1168,1,0
+negative_0441.npz,KIC 0441,0,0
+negative_0013.npz,KIC 0013,0,0
+positive_1143.npz,Kepler-1143,1,0
+positive_1059.npz,Kepler-1059,1,0
+positive_0665.npz,Kepler-0665,1,0
+positive_1136.npz,Kepler-1136,1,0
+positive_0799.npz,Kepler-0799,1,0
+positive_0378.npz,Kepler-0378,1,0
+positive_0299.npz,Kepler-0299,1,0
+positive_0842.npz,Kepler-0842,1,0
+positive_0969.npz,Kepler-0969,1,0
+positive_0868.npz,Kepler-0868,1,0
+positive_0238.npz,Kepler-0238,1,0
+positive_0131.npz,Kepler-0131,1,0
+positive_0255.npz,Kepler-0255,1,0
+negative_0106.npz,KIC 0106,0,0
+positive_0747.npz,Kepler-0747,1,0
+negative_0138.npz,KIC 0138,0,0
+positive_1145.npz,Kepler-1145,1,0
+positive_0475.npz,Kepler-0475,1,0
+positive_0690.npz,Kepler-0690,1,0
+negative_0567.npz,KIC 0567,0,0
+negative_0040.npz,KIC 0040,0,0
+negative_0561.npz,KIC 0561,0,0
+positive_0515.npz,Kepler-0515,1,0
+positive_0390.npz,Kepler-0390,1,0
+negative_0538.npz,KIC 0538,0,0
+positive_0249.npz,Kepler-0249,1,0
+positive_0003.npz,Kepler-0003,1,0
+positive_1215.npz,Kepler-1215,1,0
+positive_0545.npz,Kepler-0545,1,0
+positive_0979.npz,Kepler-0979,1,0
+negative_0345.npz,KIC 0345,0,0
+positive_0097.npz,Kepler-0097,1,0
+positive_0089.npz,Kepler-0089,1,0
+positive_0816.npz,Kepler-0816,1,0
+positive_0649.npz,Kepler-0649,1,0
+positive_0375.npz,Kepler-0375,1,0
+negative_0161.npz,KIC 0161,0,0
+positive_0731.npz,Kepler-0731,1,0
+negative_0427.npz,KIC 0427,0,0
+positive_0295.npz,Kepler-0295,1,0
+negative_0560.npz,KIC 0560,0,0
+negative_0639.npz,KIC 0639,0,0
+positive_0510.npz,Kepler-0510,1,0
+positive_0389.npz,Kepler-0389,1,0
+negative_0187.npz,KIC 0187,0,0
+positive_0197.npz,Kepler-0197,1,0
+positive_1074.npz,Kepler-1074,1,0
+negative_0458.npz,KIC 0458,0,0
+positive_0908.npz,Kepler-0908,1,0
+negative_0240.npz,KIC 0240,0,0
+positive_0917.npz,Kepler-0917,1,0
+negative_0461.npz,KIC 0461,0,0
+negative_0482.npz,KIC 0482,0,0
+negative_0534.npz,KIC 0534,0,0
+positive_0456.npz,Kepler-0456,1,0
+positive_0539.npz,Kepler-0539,1,0
+positive_0523.npz,Kepler-0523,1,0
+positive_0434.npz,Kepler-0434,1,0
+negative_0214.npz,KIC 0214,0,0
+negative_0384.npz,KIC 0384,0,0
+positive_0314.npz,Kepler-0314,1,0
+positive_0440.npz,Kepler-0440,1,0
+negative_0085.npz,KIC 0085,0,0
+positive_0193.npz,Kepler-0193,1,0
+positive_0910.npz,Kepler-0910,1,0
+positive_0811.npz,Kepler-0811,1,0
+negative_0034.npz,KIC 0034,0,0
+positive_0336.npz,Kepler-0336,1,0
+positive_1108.npz,Kepler-1108,1,0
+positive_0232.npz,Kepler-0232,1,0
+negative_0392.npz,KIC 0392,0,0
+negative_0058.npz,KIC 0058,0,0
+positive_0176.npz,Kepler-0176,1,0
+positive_0024.npz,Kepler-0024,1,0
+positive_0748.npz,Kepler-0748,1,0
+negative_0376.npz,KIC 0376,0,0
+negative_0562.npz,KIC 0562,0,0
+positive_0487.npz,Kepler-0487,1,0
+positive_0641.npz,Kepler-0641,1,0
+positive_0047.npz,Kepler-0047,1,0
+positive_0449.npz,Kepler-0449,1,0
+positive_0033.npz,Kepler-0033,1,0
+positive_1191.npz,Kepler-1191,1,0
+positive_0594.npz,Kepler-0594,1,0
+positive_1236.npz,Kepler-1236,1,0
+positive_1173.npz,Kepler-1173,1,0
+positive_0880.npz,Kepler-0880,1,0
+positive_0946.npz,Kepler-0946,1,0
+positive_0714.npz,Kepler-0714,1,0
+positive_0228.npz,Kepler-0228,1,0
+positive_1116.npz,Kepler-1116,1,0
+negative_0600.npz,KIC 0600,0,0
+positive_0822.npz,Kepler-0822,1,0
+positive_1142.npz,Kepler-1142,1,0
+negative_0027.npz,KIC 0027,0,0
+positive_0345.npz,Kepler-0345,1,0
+positive_0823.npz,Kepler-0823,1,0
+negative_0634.npz,KIC 0634,0,0
+negative_0479.npz,KIC 0479,0,0
+negative_0186.npz,KIC 0186,0,0
+positive_0867.npz,Kepler-0867,1,0
+positive_1097.npz,Kepler-1097,1,0
+negative_0462.npz,KIC 0462,0,0
+positive_0983.npz,Kepler-0983,1,0
+negative_0339.npz,KIC 0339,0,0
+positive_0850.npz,Kepler-0850,1,0
+negative_0435.npz,KIC 0435,0,0
+positive_0600.npz,Kepler-0600,1,0
+negative_0219.npz,KIC 0219,0,0
+negative_0233.npz,KIC 0233,0,0
+negative_0288.npz,KIC 0288,0,0
+positive_0421.npz,Kepler-0421,1,0
+negative_0115.npz,KIC 0115,0,0
+negative_0308.npz,KIC 0308,0,0
+positive_0362.npz,Kepler-0362,1,0
+positive_0400.npz,Kepler-0400,1,0
+negative_0105.npz,KIC 0105,0,0
+positive_1030.npz,Kepler-1030,1,0
+positive_0718.npz,Kepler-0718,1,0
+positive_0633.npz,Kepler-0633,1,0
+negative_0484.npz,KIC 0484,0,0
+positive_0171.npz,Kepler-0171,1,0
+positive_0007.npz,Kepler-0007,1,0
+negative_0611.npz,KIC 0611,0,0
+positive_0267.npz,Kepler-0267,1,0
+positive_0835.npz,Kepler-0835,1,0
+negative_0379.npz,KIC 0379,0,0
+positive_0536.npz,Kepler-0536,1,0
+positive_0760.npz,Kepler-0760,1,0
+negative_0217.npz,KIC 0217,0,0
+negative_0508.npz,KIC 0508,0,0
+positive_0820.npz,Kepler-0820,1,0
+positive_1077.npz,Kepler-1077,1,0
+positive_1125.npz,Kepler-1125,1,0
+positive_0137.npz,Kepler-0137,1,0
+negative_0242.npz,KIC 0242,0,0
+positive_0708.npz,Kepler-0708,1,0
+positive_0932.npz,Kepler-0932,1,0
+positive_1213.npz,Kepler-1213,1,0
+positive_0542.npz,Kepler-0542,1,0
+positive_0052.npz,Kepler-0052,1,0
+negative_0627.npz,KIC 0627,0,0
+positive_1079.npz,Kepler-1079,1,0
+negative_0343.npz,KIC 0343,0,0
+positive_0349.npz,Kepler-0349,1,0
+positive_0005.npz,Kepler-0005,1,0
+negative_0200.npz,KIC 0200,0,0
+positive_0280.npz,Kepler-0280,1,0
+negative_0413.npz,KIC 0413,0,0
+negative_0491.npz,KIC 0491,0,0
+positive_0102.npz,Kepler-0102,1,0
+positive_0333.npz,Kepler-0333,1,0
+negative_0129.npz,KIC 0129,0,0
+positive_0294.npz,Kepler-0294,1,0
+negative_0273.npz,KIC 0273,0,0
+positive_0852.npz,Kepler-0852,1,0
+negative_0501.npz,KIC 0501,0,0
+positive_1069.npz,Kepler-1069,1,0
+positive_0041.npz,Kepler-0041,1,0
+positive_1242.npz,Kepler-1242,1,0
+positive_0918.npz,Kepler-0918,1,0
+positive_0713.npz,Kepler-0713,1,0
+positive_1020.npz,Kepler-1020,1,0
+negative_0385.npz,KIC 0385,0,0
+positive_1072.npz,Kepler-1072,1,0
+positive_0671.npz,Kepler-0671,1,0
+negative_0315.npz,KIC 0315,0,0
+negative_0391.npz,KIC 0391,0,0
+positive_0328.npz,Kepler-0328,1,0
+positive_0664.npz,Kepler-0664,1,0
+positive_1240.npz,Kepler-1240,1,0
+positive_0499.npz,Kepler-0499,1,0
+positive_1225.npz,Kepler-1225,1,0
+positive_0882.npz,Kepler-0882,1,0
+positive_0992.npz,Kepler-0992,1,0
+negative_0492.npz,KIC 0492,0,0
+negative_0258.npz,KIC 0258,0,0
+positive_0978.npz,Kepler-0978,1,0
+positive_0929.npz,Kepler-0929,1,0
+positive_0924.npz,Kepler-0924,1,0
+positive_0447.npz,Kepler-0447,1,0
+negative_0347.npz,KIC 0347,0,0
+negative_0179.npz,KIC 0179,0,0
+negative_0358.npz,KIC 0358,0,0
+positive_0409.npz,Kepler-0409,1,0
+positive_0138.npz,Kepler-0138,1,0
+positive_0827.npz,Kepler-0827,1,0
+positive_1183.npz,Kepler-1183,1,0
+positive_0223.npz,Kepler-0223,1,0
+positive_0661.npz,Kepler-0661,1,0
+positive_0269.npz,Kepler-0269,1,0
+negative_0372.npz,KIC 0372,0,0
+positive_1028.npz,Kepler-1028,1,0
+negative_0577.npz,KIC 0577,0,0
+negative_0098.npz,KIC 0098,0,0
+negative_0342.npz,KIC 0342,0,0
+positive_1139.npz,Kepler-1139,1,0
+negative_0100.npz,KIC 0100,0,0
+positive_0388.npz,Kepler-0388,1,0
+positive_0142.npz,Kepler-0142,1,0
+positive_1162.npz,Kepler-1162,1,0
+negative_0251.npz,KIC 0251,0,0
+positive_1008.npz,Kepler-1008,1,0
