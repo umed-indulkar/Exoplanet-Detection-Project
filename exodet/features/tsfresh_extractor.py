@@ -17,7 +17,7 @@ def _to_long_df(lc: LightCurve, kind: str = "flux") -> pd.DataFrame:
 
 
 def extract_tsfresh_features(lc: LightCurve, *, default_fc_parameters: dict | None = None,
-                              disable_progressbar: bool = True) -> pd.DataFrame:
+                              disable_progressbar: bool = True, n_jobs: int = 0) -> pd.DataFrame:
     if not _TSFRESH_AVAILABLE:
         raise ImportError("tsfresh is not installed. Install with: pip install tsfresh statsmodels")
 
@@ -33,7 +33,7 @@ def extract_tsfresh_features(lc: LightCurve, *, default_fc_parameters: dict | No
         column_sort="time",
         default_fc_parameters=default_fc_parameters,
         disable_progressbar=disable_progressbar,
-        n_jobs=0,
+        n_jobs=n_jobs,
     )
     features.reset_index(drop=True, inplace=True)
     return features

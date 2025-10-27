@@ -1,7 +1,8 @@
 import argparse
 import glob
 import os
-import sys
+from typing import List
+from joblib import Parallel, delayed
 import pandas as pd
 
 from .. import load_lightcurve, load_batch_lightcurves, preprocess_lightcurve
@@ -48,37 +49,57 @@ def cmd_extract(args: argparse.Namespace) -> int:
         print("No input files matched.")
         return 1
 
+    failures = []
+
+    def process_path(path: str):
+        try:
+            lc = load_lightcurve(path)
+            lc_clean = preprocess_lightcurve(lc)
+            if args.tier == 'basic':
+                feats = extract_basic_features(lc_clean, verbose=False)
+            elif args.tier == 'tsfresh':
+                if not _HAS_TSFRESH:
+                    return (path, None, "tsfresh not available. Install: pip install tsfresh statsmodels")
+                preset = (args.tsfresh_params or 'efficient').lower()
+                if preset not in ('efficient','comprehensive'):
+                    return (path, None, f"Unknown tsfresh preset: {preset}")
+                if not _HAS_TSFRESH_PARAMS and preset == 'comprehensive':
+                    return (path, None, "Comprehensive parameters unavailable. Install tsfresh.")
+                default_fc_parameters = None
+                if _HAS_TSFRESH_PARAMS:
+                    default_fc_parameters = EfficientFCParameters() if preset == 'efficient' else ComprehensiveFCParameters()
+                feats = extract_tsfresh_features(
+                    lc_clean,
+                    default_fc_parameters=default_fc_parameters,
+                    n_jobs=getattr(args, 'workers', 0)
+                )
+            else:
+                return (path, None, f"Unknown tier: {args.tier}")
+            feats['source'] = path
+            return (path, feats, None)
+        except Exception as e:
+            return (path, None, str(e))
+
+    file_workers = getattr(args, 'file_workers', 1)
+    if file_workers and file_workers > 1:
+        results = Parallel(n_jobs=file_workers, prefer='threads')(delayed(process_path)(p) for p in inputs)
+    else:
+        results = [process_path(p) for p in inputs]
+
     rows = []
-    for path in inputs:
-        lc = load_lightcurve(path)
-        lc_clean = preprocess_lightcurve(lc)
-        if args.tier == 'basic':
-            feats = extract_basic_features(lc_clean, verbose=False)
-        elif args.tier == 'tsfresh':
-            if not _HAS_TSFRESH:
-                print("tsfresh not available. Install: pip install tsfresh statsmodels")
-                return 2
-            preset = (args.tsfresh_params or 'efficient').lower()
-            if preset not in ('efficient','comprehensive'):
-                print(f"Unknown tsfresh preset: {preset}")
-                return 3
-            if not _HAS_TSFRESH_PARAMS and preset == 'comprehensive':
-                print("Comprehensive parameters unavailable. Install tsfresh.")
-                return 2
-            default_fc_parameters = None
-            if _HAS_TSFRESH_PARAMS:
-                default_fc_parameters = EfficientFCParameters() if preset == 'efficient' else ComprehensiveFCParameters()
-            feats = extract_tsfresh_features(lc_clean, default_fc_parameters=default_fc_parameters)
+    for path, feats, err in results:
+        if err is not None or feats is None:
+            print(f"! Skipping file due to error: {path} -> {err}")
+            failures.append(path)
         else:
-            print(f"Unknown tier: {args.tier}")
-            return 3
-        feats['source'] = path
-        rows.append(feats)
+            rows.append(feats)
 
     df = pd.concat(rows, ignore_index=True)
     os.makedirs(os.path.dirname(args.output) or '.', exist_ok=True)
     df.to_csv(args.output, index=False)
     print(f"Saved: {args.output} ({df.shape})")
+    if failures:
+        print(f"Completed with {len(failures)} failures (skipped). See above for details.")
     return 0
 
 
@@ -221,6 +242,8 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument('--output', required=True, help='Output CSV path')
     sp.add_argument('--tier', choices=['basic','tsfresh'], default='basic')
     sp.add_argument('--tsfresh-params', choices=['efficient','comprehensive'], default='efficient', help='TSFresh parameter preset')
+    sp.add_argument('--workers', type=int, default=0, help='Parallel workers for TSFresh (n_jobs). 0=auto')
+    sp.add_argument('--file-workers', type=int, default=1, help='Parallel files to process concurrently')
     sp.set_defaults(func=cmd_extract)
 
     sp = sub.add_parser('batch', help='Batch process a directory')
