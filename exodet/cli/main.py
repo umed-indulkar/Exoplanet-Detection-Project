@@ -41,6 +41,9 @@ def cmd_extract(args: argparse.Namespace) -> int:
     inputs = []
     for pattern in args.input:
         inputs.extend(glob.glob(pattern))
+    # Filter to supported files only
+    supported_ext = {'.npz', '.csv', '.fits', '.fit'}
+    inputs = [p for p in inputs if os.path.isfile(p) and os.path.splitext(p)[1].lower() in supported_ext]
     if not inputs:
         print("No input files matched.")
         return 1
