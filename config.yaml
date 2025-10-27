@@ -1,0 +1,123 @@
+# Unified Exoplanet Detection System - Configuration File
+# ========================================================
+
+# System Configuration
+system:
+  seed: 42
+  device: auto  # auto, cpu, cuda
+  num_workers: 4
+  verbose: true
+  log_level: INFO
+
+# Data Configuration
+data:
+  input_dir: data/raw/
+  output_dir: data/processed/
+  file_format: auto  # auto, npz, csv, fits
+
+# Preprocessing Configuration
+preprocessing:
+  remove_nans: true
+  
+  detrend:
+    enabled: true
+    method: polynomial  # polynomial, savgol, median, none
+    order: 3
+    window_length: 51
+  
+  sigma_clip:
+    enabled: true
+    sigma: 3.0
+    iterations: 3
+    method: iterative  # iterative, mad
+  
+  normalize:
+    enabled: true
+    method: zscore  # zscore, minmax, robust, median
+  
+  fold:
+    enabled: false
+    period: null
+    epoch: 0.0
+  
+  bin:
+    enabled: false
+    bin_size: 0.01
+    method: weighted  # weighted, mean, median
+  
+  quality_mask:
+    enabled: true
+    mad_threshold: 10.0
+  
+  min_points: 10
+
+# Feature Extraction Configuration
+features:
+  tier: standard  # fast, standard, comprehensive
+  custom_features: []
+  parallel: true
+  cache_enabled: true
+  
+  fast:
+    timeout: 1.0
+  
+  standard:
+    timeout: 5.0
+  
+  comprehensive:
+    timeout: 30.0
+    n_jobs: -1
+
+# Model Configuration
+model:
+  type: siamese  # siamese, fcnn, ensemble
+  
+  architecture:
+    hidden_dims: [256, 128, 64]
+    embedding_dim: 32
+    dropout_rate: 0.3
+    activation: relu
+
+# Training Configuration
+training:
+  epochs: 100
+  batch_size: 32
+  learning_rate: 0.001
+  weight_decay: 0.00001
+  optimizer: adam  # adam, sgd, rmsprop
+  margin: 1.0
+  
+  scheduler:
+    enabled: true
+    patience: 5
+    factor: 0.5
+  
+  early_stopping:
+    enabled: true
+    patience: 10
+    min_delta: 0.0001
+  
+  pairs:
+    method: balanced  # balanced, random, hard
+    pairs_per_sample: 5
+    positive_ratio: 0.5
+
+# Evaluation Configuration
+evaluation:
+  metrics: [accuracy, precision, recall, f1, auc]
+  visualizations: [confusion_matrix, roc_curve, embedding]
+  save_predictions: true
+  distance_threshold: 0.5
+
+# Output Configuration
+output:
+  save_plots: true
+  save_features: true
+  save_models: true
+  format: csv  # csv, excel, hdf5
+  compression: null  # null, gzip, bz2
+  
+  models_dir: outputs/models/
+  logs_dir: outputs/logs/
+  results_dir: outputs/results/
+  plots_dir: outputs/plots/
