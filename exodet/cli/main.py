@@ -13,6 +13,14 @@ try:
     _HAS_TSFRESH = True
 except Exception:
     _HAS_TSFRESH = False
+    extract_tsfresh_features = None  # type: ignore
+
+try:
+    # parameter presets (optional import)
+    from tsfresh.feature_extraction import EfficientFCParameters, ComprehensiveFCParameters
+    _HAS_TSFRESH_PARAMS = True
+except Exception:
+    _HAS_TSFRESH_PARAMS = False
 
 # Optional ML
 try:
@@ -47,7 +55,17 @@ def cmd_extract(args: argparse.Namespace) -> int:
             if not _HAS_TSFRESH:
                 print("tsfresh not available. Install: pip install tsfresh statsmodels")
                 return 2
-            feats = extract_tsfresh_features(lc_clean)
+            preset = (args.tsfresh_params or 'efficient').lower()
+            if preset not in ('efficient','comprehensive'):
+                print(f"Unknown tsfresh preset: {preset}")
+                return 3
+            if not _HAS_TSFRESH_PARAMS and preset == 'comprehensive':
+                print("Comprehensive parameters unavailable. Install tsfresh.")
+                return 2
+            default_fc_parameters = None
+            if _HAS_TSFRESH_PARAMS:
+                default_fc_parameters = EfficientFCParameters() if preset == 'efficient' else ComprehensiveFCParameters()
+            feats = extract_tsfresh_features(lc_clean, default_fc_parameters=default_fc_parameters)
         else:
             print(f"Unknown tier: {args.tier}")
             return 3
@@ -196,6 +214,7 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument('--input', nargs='+', required=True, help='Glob patterns')
     sp.add_argument('--output', required=True, help='Output CSV path')
     sp.add_argument('--tier', choices=['basic','tsfresh'], default='basic')
+    sp.add_argument('--tsfresh-params', choices=['efficient','comprehensive'], default='efficient', help='TSFresh parameter preset')
     sp.set_defaults(func=cmd_extract)
 
     sp = sub.add_parser('batch', help='Batch process a directory')
