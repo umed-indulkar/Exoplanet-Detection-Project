@@ -73,6 +73,7 @@ def cmd_extract(args: argparse.Namespace) -> int:
         rows.append(feats)
 
     df = pd.concat(rows, ignore_index=True)
+    os.makedirs(os.path.dirname(args.output) or '.', exist_ok=True)
     df.to_csv(args.output, index=False)
     print(f"Saved: {args.output} ({df.shape})")
     return 0
@@ -139,6 +140,7 @@ def cmd_predict(args: argparse.Namespace) -> int:
         preds = predict_on_features(model, df)
         out = df.copy()
         out['prediction'] = preds
+        os.makedirs(os.path.dirname(args.output) or '.', exist_ok=True)
         out.to_csv(args.output, index=False)
         print(f"Saved predictions: {args.output} ({out.shape})")
         return 0
@@ -159,6 +161,7 @@ def cmd_predict(args: argparse.Namespace) -> int:
     df = pd.concat(rows, ignore_index=True)
     preds = predict_on_features(model, df)
     df['prediction'] = preds
+    os.makedirs(os.path.dirname(args.output) or '.', exist_ok=True)
     df.to_csv(args.output, index=False)
     print(f"Saved predictions: {args.output} ({df.shape})")
     return 0
