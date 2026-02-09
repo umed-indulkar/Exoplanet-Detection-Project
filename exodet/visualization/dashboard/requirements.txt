@@ -1,0 +1,24 @@
+streamlit
+pandas
+numpy
+plotly
+scikit-learn
+joblib  # For loading model.pkl
+
+cd "H:\My Drive\Sem6MiniProject\exoplanet_app"
+
+py -m venv venv
+
+venv\Scripts\activate
+
+python -m ensurepip --upgrade
+
+python -m pip install --upgrade pip
+
+python -m pip install streamlit numpy pandas matplotlib scikit-learn joblib
+
+pip freeze > requirements.txt
+
+streamlit hello
+
+streamlit run app.py
