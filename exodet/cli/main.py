@@ -1,3 +1,14 @@
+"""
+Modular CLI - Each team works independently
+==========================================
+
+CLI now imports from separate modules:
+- preprocessing/: Data loading and cleaning
+- feature_extraction/: Feature extraction
+- models/: ML models (baseline and siamese)
+- pipeline/: Integration and workflows
+"""
+
 import argparse
 import glob
 import os
@@ -5,46 +16,28 @@ from typing import List
 from joblib import Parallel, delayed
 import pandas as pd
 
-from .. import load_lightcurve, load_batch_lightcurves, preprocess_lightcurve
-from ..features import extract_basic_features
+# Import from separate modules (each team's work)
+from ..preprocessing import load_lightcurve, load_batch_lightcurves, preprocess_lightcurve
+from ..feature_extraction import extract_basic_features, extract_tsfresh_features, _HAS_TSFRESH
+from ..models import train_baseline, evaluate_baseline, train_siamese_from_csv, evaluate_siamese_from_csv, _HAS_SIAMESE
 
-# Optional imports
+# Optional TSFresh parameters
 try:
-    from ..features.tsfresh_extractor import extract_tsfresh_features
-    _HAS_TSFRESH = True
-except Exception:
-    _HAS_TSFRESH = False
-    extract_tsfresh_features = None  # type: ignore
-
-try:
-    # parameter presets (optional import)
     from tsfresh.feature_extraction import EfficientFCParameters, ComprehensiveFCParameters
     _HAS_TSFRESH_PARAMS = True
 except Exception:
     _HAS_TSFRESH_PARAMS = False
 
-# Optional ML
-try:
-    from ..ml.models import load_model, save_model, train_baseline, evaluate_baseline, predict_on_features
-    _HAS_SKLEARN = True
-except Exception:
-    _HAS_SKLEARN = False
-
-# Optional Siamese
-try:
-    from ..ml.siamese import train_siamese_from_csv, evaluate_siamese_from_csv
-    _HAS_SIAMESE = True
-except Exception:
-    _HAS_SIAMESE = False
-
-
 def cmd_extract(args: argparse.Namespace) -> int:
+    """Extract features from individual files"""
     inputs = []
     for pattern in args.input:
         inputs.extend(glob.glob(pattern))
+    
     # Filter to supported files only
     supported_ext = {'.npz', '.csv', '.fits', '.fit'}
     inputs = [p for p in inputs if os.path.isfile(p) and os.path.splitext(p)[1].lower() in supported_ext]
+    
     if not inputs:
         print("No input files matched.")
         return 1
@@ -53,8 +46,11 @@ def cmd_extract(args: argparse.Namespace) -> int:
 
     def process_path(path: str):
         try:
+            # Preprocessing team's work
             lc = load_lightcurve(path)
             lc_clean = preprocess_lightcurve(lc)
+            
+            # Feature extraction team's work
             if args.tier == 'basic':
                 feats = extract_basic_features(lc_clean, verbose=False)
             elif args.tier == 'tsfresh':
@@ -80,133 +76,84 @@ def cmd_extract(args: argparse.Namespace) -> int:
         except Exception as e:
             return (path, None, str(e))
 
-    file_workers = getattr(args, 'file_workers', 1)
-    if file_workers and file_workers > 1:
-        results = Parallel(n_jobs=file_workers, prefer='threads')(delayed(process_path)(p) for p in inputs)
-    else:
-        results = [process_path(p) for p in inputs]
-
-    rows = []
+    results = Parallel(n_jobs=args.file_workers)(
+        delayed(process_path)(path) for path in inputs
+    )
+    
+    # Collect successful results
+    all_features = []
     for path, feats, err in results:
-        if err is not None or feats is None:
-            print(f"! Skipping file due to error: {path} -> {err}")
-            failures.append(path)
+        if err:
+            failures.append((path, err))
         else:
-            rows.append(feats)
-
-    df = pd.concat(rows, ignore_index=True)
-    os.makedirs(os.path.dirname(args.output) or '.', exist_ok=True)
-    df.to_csv(args.output, index=False)
-    print(f"Saved: {args.output} ({df.shape})")
+            all_features.append(feats)
+    
     if failures:
-        print(f"Completed with {len(failures)} failures (skipped). See above for details.")
+        print(f"Failed to process {len(failures)} files:")
+        for path, err in failures[:5]:
+            print(f"  {path}: {err}")
+        if len(failures) > 5:
+            print(f"  ... and {len(failures)-5} more")
+    
+    if not all_features:
+        print("No files processed successfully.")
+        return 1
+    
+    # Save results
+    df = pd.DataFrame(all_features)
+    df.to_csv(args.output, index=False)
+    print(f"Extracted features for {len(all_features)} files → {args.output}")
     return 0
-
 
 def cmd_batch(args: argparse.Namespace) -> int:
-    curves = load_batch_lightcurves(args.input, pattern=args.pattern)
-    if not curves:
-        print("No curves found.")
+    """Batch process a directory of files"""
+    pattern = os.path.join(args.input, args.pattern)
+    files = glob.glob(pattern)
+    if not files:
+        print(f"No files found matching {pattern}")
         return 1
-    rows = []
-    for lc in curves:
-        lc_clean = preprocess_lightcurve(lc)
-        feats = extract_basic_features(lc_clean, verbose=False)
-        feats['source'] = lc.source_file
-        rows.append(feats)
-    df = pd.concat(rows, ignore_index=True)
-    df.to_csv(args.output, index=False)
-    print(f"Saved: {args.output} ({df.shape})")
-    return 0
-
-
-def cmd_summary(args: argparse.Namespace) -> int:
-    df = pd.read_csv(args.input)
-    print(df.describe(include='all'))
-    return 0
-
+    
+    # Create temporary args for extract
+    extract_args = argparse.Namespace()
+    extract_args.input = files
+    extract_args.output = args.output
+    extract_args.tier = getattr(args, 'tier', 'tsfresh')
+    extract_args.tsfresh_params = getattr(args, 'tsfresh_params', 'efficient')
+    extract_args.workers = getattr(args, 'workers', 0)
+    extract_args.file_workers = getattr(args, 'file_workers', 1)
+    
+    return cmd_extract(extract_args)
 
 def cmd_train(args: argparse.Namespace) -> int:
-    if not _HAS_SKLEARN:
-        print("scikit-learn not available. Install: pip install scikit-learn joblib")
-        return 2
-    df = pd.read_csv(args.features)
-    if args.target not in df.columns:
-        print(f"Target column '{args.target}' not found in features.")
-        return 3
-    model, metrics = train_baseline(df, target_col=args.target, model_type=args.model)
-    os.makedirs(os.path.dirname(args.output) or '.', exist_ok=True)
-    save_model(model, args.output)
-    print(f"Saved model to: {args.output}")
-    print("Metrics:", metrics)
+    """Train baseline ML models"""
+    # ML team's work
+    model = train_baseline(
+        args.features,
+        target_col=args.target,
+        model_type=args.model,
+        output_path=args.output
+    )
+    print(f"Trained {args.model} model: {args.output}")
     return 0
-
 
 def cmd_evaluate(args: argparse.Namespace) -> int:
-    if not _HAS_SKLEARN:
-        print("scikit-learn not available. Install: pip install scikit-learn joblib")
-        return 2
-    df = pd.read_csv(args.features)
-    model = load_model(args.model)
-    metrics = evaluate_baseline(model, df, target_col=args.target)
+    """Evaluate baseline ML models"""
+    # ML team's work
+    metrics = evaluate_baseline(
+        args.model,
+        args.features,
+        target_col=args.target
+    )
     print("Metrics:", metrics)
     return 0
 
-
-def cmd_predict(args: argparse.Namespace) -> int:
-    if not _HAS_SKLEARN:
-        print("scikit-learn not available. Install: pip install scikit-learn joblib")
-        return 2
-    model = load_model(args.model)
-    # If user provided features CSV, use it; otherwise compute basic features from curves
-    if args.features:
-        df = pd.read_csv(args.features)
-        preds = predict_on_features(model, df)
-        out = df.copy()
-        out['prediction'] = preds
-        os.makedirs(os.path.dirname(args.output) or '.', exist_ok=True)
-        out.to_csv(args.output, index=False)
-        print(f"Saved predictions: {args.output} ({out.shape})")
-        return 0
-
-    inputs = []
-    for pattern in args.input:
-        inputs.extend(glob.glob(pattern))
-    if not inputs:
-        print("No input files matched.")
-        return 1
-    rows = []
-    for path in inputs:
-        lc = load_lightcurve(path)
-        lc_clean = preprocess_lightcurve(lc)
-        feats = extract_basic_features(lc_clean, verbose=False)
-        feats['source'] = path
-        rows.append(feats)
-    df = pd.concat(rows, ignore_index=True)
-    preds = predict_on_features(model, df)
-    df['prediction'] = preds
-    os.makedirs(os.path.dirname(args.output) or '.', exist_ok=True)
-    df.to_csv(args.output, index=False)
-    print(f"Saved predictions: {args.output} ({df.shape})")
-    return 0
-
-
-def cmd_dashboard(args: argparse.Namespace) -> int:
-    try:
-        import streamlit.web.cli as stcli
-        from pathlib import Path
-        app_path = Path(__file__).resolve().parent.parent / 'dashboard' / 'app.py'
-        return stcli.main_run([str(app_path)])
-    except Exception as e:
-        print(f"Failed to launch dashboard: {e}")
-        print("Install with: pip install streamlit")
-        return 1
-
-
 def cmd_train_siamese(args: argparse.Namespace) -> int:
+    """Train Siamese Neural Network"""
     if not _HAS_SIAMESE:
-        print("Siamese trainer not available. Ensure torch is installed: pip install torch --index-url https://download.pytorch.org/whl/cpu")
+        print("Siamese trainer not available. Ensure torch is installed")
         return 2
+    
+    # ML team's work
     res = train_siamese_from_csv(
         args.features,
         target_col=args.target,
@@ -223,63 +170,62 @@ def cmd_train_siamese(args: argparse.Namespace) -> int:
     print("Metrics:", res.metrics)
     return 0
 
-
 def cmd_evaluate_siamese(args: argparse.Namespace) -> int:
+    """Evaluate Siamese Neural Network"""
     if not _HAS_SIAMESE:
-        print("Siamese evaluator not available. Ensure torch is installed: pip install torch --index-url https://download.pytorch.org/whl/cpu")
+        print("Siamese evaluator not available. Ensure torch is installed")
         return 2
+    
+    # ML team's work
     metrics = evaluate_siamese_from_csv(args.model, args.features, target_col=args.target, device=args.device)
     print("Metrics:", metrics)
     return 0
 
+def cmd_organize(args: argparse.Namespace) -> int:
+    """Organize dataset - Pipeline team's work"""
+    from ..pipeline.data_organizer import organize_dataset
+    organize_dataset()
+    return 0
 
 def build_parser() -> argparse.ArgumentParser:
-    p = argparse.ArgumentParser(prog='exodet', description='Exoplanet Detection CLI')
+    """Build argument parser for modular CLI"""
+    p = argparse.ArgumentParser(prog='exodet', description='Exoplanet Detection CLI - Modular')
     sub = p.add_subparsers(dest='cmd')
 
+    # Feature extraction commands (Feature Extraction Team)
     sp = sub.add_parser('extract', help='Extract features from files')
     sp.add_argument('--input', nargs='+', required=True, help='Glob patterns')
     sp.add_argument('--output', required=True, help='Output CSV path')
-    sp.add_argument('--tier', choices=['basic','tsfresh'], default='basic')
-    sp.add_argument('--tsfresh-params', choices=['efficient','comprehensive'], default='efficient', help='TSFresh parameter preset')
-    sp.add_argument('--workers', type=int, default=0, help='Parallel workers for TSFresh (n_jobs). 0=auto')
-    sp.add_argument('--file-workers', type=int, default=1, help='Parallel files to process concurrently')
+    sp.add_argument('--tier', choices=['basic','tsfresh'], default='tsfresh')
+    sp.add_argument('--tsfresh-params', choices=['efficient','comprehensive'], default='efficient')
+    sp.add_argument('--workers', type=int, default=0, help='TSFresh workers')
+    sp.add_argument('--file-workers', type=int, default=1, help='Parallel files')
     sp.set_defaults(func=cmd_extract)
 
-    sp = sub.add_parser('batch', help='Batch process a directory')
+    sp = sub.add_parser('batch', help='Batch process directory')
     sp.add_argument('--input', required=True, help='Directory path')
-    sp.add_argument('--pattern', default='*.npz', help='Glob pattern')
+    sp.add_argument('--pattern', default='*.npz')
     sp.add_argument('--output', required=True)
+    sp.add_argument('--tier', choices=['basic','tsfresh'], default='tsfresh')
+    sp.add_argument('--workers', type=int, default=0)
+    sp.add_argument('--file-workers', type=int, default=1)
     sp.set_defaults(func=cmd_batch)
 
-    sp = sub.add_parser('summary', help='Summarize a features CSV')
-    sp.add_argument('--input', required=True)
-    sp.set_defaults(func=cmd_summary)
-
-    sp = sub.add_parser('train', help='Train a baseline model on features CSV')
+    # ML model commands (ML Team)
+    sp = sub.add_parser('train', help='Train baseline model')
     sp.add_argument('--features', required=True)
     sp.add_argument('--target', default='label')
     sp.add_argument('--model', choices=['logreg','rf'], default='rf')
     sp.add_argument('--output', required=True)
     sp.set_defaults(func=cmd_train)
 
-    sp = sub.add_parser('evaluate', help='Evaluate a saved model on features CSV')
+    sp = sub.add_parser('evaluate', help='Evaluate baseline model')
     sp.add_argument('--model', required=True)
     sp.add_argument('--features', required=True)
     sp.add_argument('--target', default='label')
     sp.set_defaults(func=cmd_evaluate)
 
-    sp = sub.add_parser('predict', help='Predict on features or raw curves')
-    sp.add_argument('--model', required=True)
-    sp.add_argument('--features', help='Optional features CSV')
-    sp.add_argument('--input', nargs='+', help='Glob patterns for raw curves')
-    sp.add_argument('--output', required=True)
-    sp.set_defaults(func=cmd_predict)
-
-    sp = sub.add_parser('dashboard', help='Launch Streamlit dashboard')
-    sp.set_defaults(func=cmd_dashboard)
-
-    sp = sub.add_parser('train-siamese', help='Train Siamese model on features CSV')
+    sp = sub.add_parser('train-siamese', help='Train Siamese model')
     sp.add_argument('--features', required=True)
     sp.add_argument('--target', default='label')
     sp.add_argument('--embedding', type=int, default=32)
@@ -292,24 +238,27 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument('--seed', type=int, default=42)
     sp.set_defaults(func=cmd_train_siamese)
 
-    sp = sub.add_parser('evaluate-siamese', help='Evaluate Siamese model on features CSV')
+    sp = sub.add_parser('evaluate-siamese', help='Evaluate Siamese model')
     sp.add_argument('--model', required=True)
     sp.add_argument('--features', required=True)
     sp.add_argument('--target', default='label')
     sp.add_argument('--device', default='auto', choices=['auto','cpu','cuda'])
     sp.set_defaults(func=cmd_evaluate_siamese)
 
+    # Pipeline commands (Pipeline Team)
+    sp = sub.add_parser('organize', help='Organize dataset')
+    sp.set_defaults(func=cmd_organize)
+
     return p
 
-
 def main(argv=None) -> int:
+    """Main entry point"""
     parser = build_parser()
     args = parser.parse_args(argv)
     if not hasattr(args, 'func'):
         parser.print_help()
         return 1
     return args.func(args)
-
 
 if __name__ == '__main__':
     raise SystemExit(main())

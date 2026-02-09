@@ -1,21 +1,24 @@
 """
-Exoplanet Detection System - Unified Package
+Exoplanet Detection System - Modular Package
 ==============================================
 
-A comprehensive toolkit for detecting exoplanets from light curve data combining:
-- Advanced feature extraction (100-800+ features)
-- Machine learning models (Siamese networks, ensembles)
-- High-performance parallel processing
-- Interactive visualization and dashboards
+A modular toolkit for detecting exoplanets from light curve data.
+Each module is independent - teams can work separately:
+
+- preprocessing/: Data loading and cleaning
+- feature_extraction/: Feature extraction from light curves  
+- models/: ML models (baseline and Siamese)
+- visualization/: Visualization and plotting tools
+- pipeline/: Integration and workflows
+- cli/: Command line interface
 
 Copyright (c) 2025 Exoplanet Detection Team
 License: MIT
 """
 
-from .core.data_loader import load_lightcurve, load_batch_lightcurves
-from .core.preprocessing import PreprocessingPipeline, preprocess_lightcurve
-from .core.config import Config
-from .features.basic_extractor import BasicFeatureExtractor, extract_basic_features
+from .preprocessing import load_lightcurve, load_batch_lightcurves, preprocess_lightcurve
+from .feature_extraction import extract_basic_features, extract_tsfresh_features
+from .models import train_baseline, evaluate_baseline, train_siamese_from_csv, evaluate_siamese_from_csv
 from .__version__ import (
     __version__,
     __author__,
@@ -30,16 +33,20 @@ __all__ = [
     '__email__',
     '__description__',
     
-    # Core functionality
+    # Preprocessing module
     'load_lightcurve',
     'load_batch_lightcurves',
-    'PreprocessingPipeline',
     'preprocess_lightcurve',
-    'Config',
     
-    # Feature extraction
-    'BasicFeatureExtractor',
+    # Feature extraction module
     'extract_basic_features',
+    'extract_tsfresh_features',
+    
+    # Models module
+    'train_baseline',
+    'evaluate_baseline',
+    'train_siamese_from_csv',
+    'evaluate_siamese_from_csv',
 ]
 
 # Package metadata
