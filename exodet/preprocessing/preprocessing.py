@@ -112,7 +112,9 @@ class PreprocessingPipeline:
                 time=lc.time.copy(),
                 flux=lc.flux.copy(),
                 flux_err=lc.flux_err.copy() if lc.flux_err is not None else None,
-                meta=lc.meta.copy() if lc.meta else None
+                metadata=lc.metadata.copy() if lc.metadata else None,
+                source_file=lc.source_file,
+                format=lc.format
             )
         
         self.history = []

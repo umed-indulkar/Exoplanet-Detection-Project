@@ -10,9 +10,9 @@ Main functions:
 - extract_tsfresh_features: Advanced TSFresh features
 """
 
-from ..features.basic_extractor import BasicFeatureExtractor, extract_basic_features
+from .basic_extractor import BasicFeatureExtractor, extract_basic_features
 try:
-    from ..features.tsfresh_extractor import extract_tsfresh_features
+    from .tsfresh_extractor import extract_tsfresh_features
     _HAS_TSFRESH = True
 except ImportError:
     extract_tsfresh_features = None

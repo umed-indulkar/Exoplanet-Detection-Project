@@ -12,9 +12,9 @@ Main functions:
 - evaluate_siamese: Evaluate Siamese model
 """
 
-from ..ml.models import train_baseline, evaluate_baseline, load_model, save_model, predict_on_features
+from .baseline_models import train_baseline, evaluate_baseline, load_model, save_model, predict_on_features
 try:
-    from ..ml.siamese import train_siamese_from_csv, evaluate_siamese_from_csv
+    from .siamese_model import train_siamese_from_csv, evaluate_siamese_from_csv
     _HAS_SIAMESE = True
 except ImportError:
     train_siamese_from_csv = None
