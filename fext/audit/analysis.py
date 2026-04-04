@@ -10,8 +10,8 @@ from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
 # ---------- CONFIGURATION ----------
-FILE_IN = r"D:\ppp\data\features\features_pruned.csv"  # Update path if necessary
-FILE_OUT_RANKINGS = r"D:\ppp\data\features\pca_rankings.csv"
+FILE_IN = r"D:\ppp\data\features_500\features_curve_500_pruned.csv"  # Update path if necessary
+FILE_OUT_RANKINGS = r"D:\ppp\data\features_500\pca_rankings_curve_500.csv"
 
 def print_ram():
     mem = psutil.virtual_memory()

@@ -72,8 +72,8 @@ class DeepFFNN(nn.Module):
 # --- 3. TRAINING ENGINE ---
 def train_model():
     # Setup Paths
-    TRAIN_CSV = r"D:\ppp\data\features\train_balanced.csv"
-    TEST_CSV = r"D:\ppp\data\features\test_balanced.csv"
+    TRAIN_CSV = r"D:\ppp\data\features_500\train_balanced_curve_500.csv"
+    TEST_CSV = r"D:\ppp\data\features_500\test_balanced_curve_500.csv"
 
     # Shared Scaler
     scaler = StandardScaler()

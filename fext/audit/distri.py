@@ -59,10 +59,10 @@ def check_label_distribution(file_path):
 if __name__ == '__main__':
     # Update these paths to your generated splits
     FILES_TO_CHECK = [
-        r"D:\ppp\data\features\train_1.csv",
-        r"D:\ppp\data\features\test_1.csv",
-        r"D:\ppp\data\features\train_balanced.csv",
-        r"D:\ppp\data\features\test_balanced.csv"
+        r"D:\ppp\data\features_500\train_1_curve_500.csv",
+        r"D:\ppp\data\features_500\test_1_curve_500.csv",
+        r"D:\ppp\data\features_500\train_balanced_curve_500.csv",
+        r"D:\ppp\data\features_500\test_balanced_curve_500.csv"
     ]
 
     for file in FILES_TO_CHECK:

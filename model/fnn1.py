@@ -55,8 +55,8 @@ class SimpleFFNN(nn.Module):
 # --- 3. TRAINING LOOP ---
 def train_model():
     # Load Data
-    train_data = ExoplanetDataset(r"D:\ppp\data\features\train_balanced.csv")
-    test_data = ExoplanetDataset(r"D:\ppp\data\features\test_balanced.csv")
+    train_data = ExoplanetDataset(r"D:\ppp\data\features_500\train_balanced_curve_500.csv")
+    test_data = ExoplanetDataset(r"D:\ppp\data\features_500\test_balanced_curve_500.csv")
     
     train_loader = DataLoader(train_data, batch_size=32, shuffle=True)
     test_loader = DataLoader(test_data, batch_size=32, shuffle=False)

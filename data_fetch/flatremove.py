@@ -3,8 +3,8 @@ import os
 import numpy as np
 
 # --- PATHS ---
-DATA_DIR = r"D:\ppp\data\dataset"
-FILES_TO_CLEAN = ["training_dataset.csv", "candidates.csv"]
+DATA_DIR = r"D:\ppp\data\dataset_500"
+FILES_TO_CLEAN = ["raw_curve_500_head.csv"]
 
 def clean_flat_rows(file_name):
     file_path = os.path.join(DATA_DIR, file_name)

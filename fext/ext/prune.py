@@ -7,8 +7,8 @@ from scipy.cluster.hierarchy import linkage, fcluster
 from scipy.spatial.distance import squareform
 
 # ---------- SETTINGS ----------
-INPUT_PATH = r"D:\ppp\data\features\features_raw.csv"
-OUTPUT_PATH = r"D:\ppp\data\features\features_pruned.csv"
+INPUT_PATH = r"D:\ppp\data\features_500\features_curve_500.csv"
+OUTPUT_PATH = r"D:\ppp\data\features_500\features_curve_500_pruned.csv"
 CORR_THRESHOLD = 0.95  # If two features are 95% similar, keep only one
 
 def print_ram_usage():

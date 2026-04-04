@@ -75,7 +75,7 @@ class DeepRawFNN(nn.Module):
 
 # --- 3. MAIN TRAINING BLOCK ---
 if __name__ == '__main__':
-    RAW_FILE = r"D:\ppp\data\dataset\raw_cleaned.csv"
+    RAW_FILE = r"D:\ppp\data\dataset_500\raw_curve_500_cleaned.csv"
     
     # Step 1: Split data in memory
     train_df, test_df, flux_cols, label_col = prepare_raw_data(RAW_FILE)

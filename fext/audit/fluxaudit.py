@@ -82,5 +82,5 @@ def audit_exoplanet_dataset(csv_path):
 
 if __name__ == '__main__':
     # Update this to your headered file path
-    RAW_DATA = r"D:\ppp\data\dataset\training_with_headers.csv"
+    RAW_DATA = r"D:\ppp\data\dataset_500\raw_curve_500_head.csv"
     audit_exoplanet_dataset(RAW_DATA)

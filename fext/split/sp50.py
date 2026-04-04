@@ -3,9 +3,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.utils import resample
 
 # --- CONFIG ---
-FILE_IN = r"D:\ppp\data\features\features_pruned.csv"
-TRAIN_OUT = r"D:\ppp\data\features\train_balanced.csv"
-TEST_OUT = r"D:\ppp\data\features\test_balanced.csv"
+FILE_IN = r"D:\ppp\data\features_500\features_curve_500_pruned.csv"
+TRAIN_OUT = r"D:\ppp\data\features_500\train_balanced_curve_500.csv"
+TEST_OUT = r"D:\ppp\data\features_500\test_balanced_curve_500.csv"
 
 def balanced_50_50_split():
     print("🚀 Loading data for Balanced 50/50 Split...")

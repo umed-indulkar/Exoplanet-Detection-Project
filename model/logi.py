@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # --- LOAD DATA ---
-train = pd.read_csv(r"D:\ppp\data\features\train_balanced.csv")
-test = pd.read_csv(r"D:\ppp\data\features\test_balanced.csv")
+train = pd.read_csv(r"D:\ppp\data\features_500\train_1_curve_500.csv")
+test = pd.read_csv(r"D:\ppp\data\features_500\test_1_curve_500.csv")
 
 X_train, y_train = train.drop(columns=['Label']), train['Label']
 X_test, y_test = test.drop(columns=['Label']), test['Label']

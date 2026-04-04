@@ -6,9 +6,9 @@ from sklearn.preprocessing import StandardScaler
 import os
 
 # --- CONFIG ---
-FILE_IN = r"D:\ppp\data\features\features_pruned.csv"
-TRAIN_OUT = r"D:\ppp\data\features\train_1.csv"
-TEST_OUT = r"D:\ppp\data\features\test_1.csv"
+FILE_IN = r"D:\ppp\data\features_500\features_curve_500_pruned.csv"
+TRAIN_OUT = r"D:\ppp\data\features_500\train_1_curve_500.csv"
+TEST_OUT = r"D:\ppp\data\features_500\test_1_curve_500.csv"
 N_CLUSTERS = 5 # Groups the data into 5 unique "shapes"
 
 def clustered_stratified_split():

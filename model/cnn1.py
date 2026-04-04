@@ -71,8 +71,8 @@ class FeatureCNN1D(nn.Module):
 
 # --- 3. TRAINING LOOP ---
 def train_cnn():
-    TRAIN_CSV = r"D:\ppp\data\features\train_balanced.csv"
-    TEST_CSV = r"D:\ppp\data\features\test_balanced.csv"
+    TRAIN_CSV = r"D:\ppp\data\features_500\train_balanced_curve_500.csv"
+    TEST_CSV = r"D:\ppp\data\features_500\test_balanced_curve_500.csv"
 
     scaler = StandardScaler()
     train_ds = FeatureCNNDataset(TRAIN_CSV, scaler, fit_scaler=True)

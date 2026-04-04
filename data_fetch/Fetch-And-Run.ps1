@@ -1,10 +1,10 @@
 # D:\ppp\data_fetch\Fetch-Parallel.ps1
 $BaseDir      = "D:\ppp\data_fetch"
 $FetchedDir   = "D:\ppp\data\fetched"
-$RawDir       = "D:\ppp\data\raw_tbl_files"
-$LogFile      = "D:\ppp\data\dataset\processed_log.txt"
+$RawDir       = "D:\ppp\data\raw_files"
+$LogFile      = "D:\ppp\data\dataset_500\processed_log.txt"
 $LinksFile    = "D:\ppp\data\fetched\all_tbl_links.txt"
-$PythonScript = "D:\ppp\data_fetch\process_dataset.py"
+$PythonScript = "D:\ppp\data_fetch\process_dataset_2.py"
 
 # Ensure directories exist
 if (-not (Test-Path $RawDir)) { New-Item -ItemType Directory -Path $RawDir -Force | Out-Null }
@@ -12,13 +12,13 @@ if (-not (Test-Path (Split-Path $LogFile))) { New-Item -ItemType Directory -Path
 if (-not (Test-Path $LogFile)) { New-Item -ItemType File -Path $LogFile -Force | Out-Null }
 
 $Links = Get-Content $LinksFile
-Write-Host "--- PARALLEL PIPELINE STARTING (Throttle: 5) ---" -ForegroundColor Cyan
+Write-Host "--- PARALLEL PIPELINE STARTING (Throttle: 12) ---" -ForegroundColor Cyan
 
 $Links | ForEach-Object -Parallel {
     # Redefine variables for thread scope
-    $RawDir       = "D:\ppp\data\raw_tbl_files"
-    $LogFile      = "D:\ppp\data\dataset\processed_log.txt"
-    $PythonScript = "D:\ppp\data_fetch\process_dataset.py"
+    $RawDir       = "D:\ppp\data\raw_files"
+    $LogFile      = "D:\ppp\data\dataset_500\processed_log.txt"
+    $PythonScript = "D:\ppp\data_fetch\process_dataset_2.py"
     
     $FolderUrl = $_
     $KID = ($FolderUrl -split '/')[-2]
@@ -49,7 +49,7 @@ $Links | ForEach-Object -Parallel {
     } catch {
         Write-Host "[TIMEOUT/SKIP] $KID" -ForegroundColor Red
     }
-} -ThrottleLimit 5
+} -ThrottleLimit 12
 
 Write-Host "--- PROCESSING COMPLETE ---" -ForegroundColor Cyan
 Write-Host "Run the merge command to combine the CSV files." -ForegroundColor Green

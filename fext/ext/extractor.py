@@ -11,9 +11,9 @@ from tsfresh.utilities.dataframe_functions import impute
 from tqdm import tqdm
 
 # ---------- CONFIGURATION ----------
-INPUT_PATH = r"D:\ppp\data\dataset\raw_cleaned.csv"
-OUTPUT_PATH = r"D:\ppp\data\features\features_final.csv"
-CHECKPOINT_DIR = r"D:\ppp\data\features\checkpoints"
+INPUT_PATH = r"D:\ppp\data\dataset_500\raw_curve_500_cleaned.csv"
+OUTPUT_PATH = r"D:\ppp\data\features_500\features_curve_500.csv"
+CHECKPOINT_DIR = r"D:\ppp\data\features_500\checkpoints"
 WORKERS = 8       # Adjust to your CPU cores (e.g., 4, 8, 16)
 CHUNK_SIZE = 50   # Number of planets per worker task
 
