@@ -1,3 +1,0 @@
-"""Command-line interface for exodet.
-Run with: python -m exodet.cli ...
-"""

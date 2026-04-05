@@ -1,0 +1,16 @@
+[project]
+name = "exoplanet-detection"
+version = "0.1.0"
+description = "Lightweight exoplanet detection system with ML models"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "astropy>=7.2.0",
+    "kaggle>=2.0.0",
+    "matplotlib>=3.10.8",
+    "psutil>=7.2.2",
+    "seaborn>=0.13.2",
+    "torch>=2.11.0",
+    "tsfresh>=0.21.1",
+    "xgboost>=3.2.0",
+]

@@ -1,0 +1,4 @@
+NEURAL NETWORK RESULTS
+==============================
+FeedforwardNN: 0.7097
+CNN: 0.7317

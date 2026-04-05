@@ -1,0 +1,5 @@
+CLEANED SIAMESE NETWORK RESULTS
+========================================
+Train Accuracy: 0.8222
+Test Accuracy: 0.8173
+Candidates Accuracy: 0.8000

@@ -1,0 +1,5 @@
+BASELINE MODEL RESULTS
+==================================================
+random_forest       : 0.7333
+logistic_regression : 0.7042
+xgboost             : 0.7553
