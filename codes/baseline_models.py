@@ -12,7 +12,7 @@ import os
 class BaselineModels:
     """Baseline models for exoplanet detection using dataset_500"""
     
-    def __init__(self, data_path="data/dataset_500/dataset_500/raw_curve_500_head.csv"):
+    def __init__(self, data_path="data/extracted_features/features_curve_500_pruned.csv"):
         self.data_path = data_path
         self.scaler = StandardScaler()
         self.models = {}

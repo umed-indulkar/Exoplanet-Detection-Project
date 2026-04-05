@@ -298,7 +298,7 @@ def train_cleaned_siamese():
     """Train Siamese network on cleaned dataset"""
     
     # Data paths
-    DATA_PATH = "data/dataset_500/dataset_500/raw_curve_500_cleaned.csv"
+    DATA_PATH = "data/processed_curves/raw_curve_500_cleaned.csv"
     
     if not os.path.exists(DATA_PATH):
         print(f"❌ Cleaned data file not found: {DATA_PATH}")
