@@ -133,7 +133,7 @@ export default function NextSection() {
           transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
         >
           <a
-            href="http://localhost:8501"
+            href="https://exovision-ai.streamlit.app/"
             target="_blank"
             rel="noopener noreferrer"
             className="group inline-flex items-center gap-3 px-8 py-4 rounded-2xl text-sm font-semibold tracking-wide transition-all duration-300"
