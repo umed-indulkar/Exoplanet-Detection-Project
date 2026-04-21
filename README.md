@@ -34,3 +34,9 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+
+so i want to make a dashboard with proper analysis and display for that i have a half builf dashboard i want you to make use of     
+  that code and remake something more practical and more correct because the models are not showing proper results i want you to      
+  make the proper processign pipeline so that the visualization is done and good analysis of  the curves are possible also 

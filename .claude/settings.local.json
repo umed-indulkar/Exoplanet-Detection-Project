@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python generate_test_data.py)",
+      "Bash(PYTHONIOENCODING=utf-8 python generate_test_data.py)",
+      "Bash(python _smoke_test.py)",
+      "Bash(python _model_test.py)",
+      "Bash(PYTHONIOENCODING=utf-8 python -c \"import ast, io; [ast.parse\\(io.open\\(p, encoding='utf-8'\\).read\\(\\)\\) for p in ['app.py','pipeline.py','models.py','utils.py']]; print\\('OK'\\)\")",
+      "Bash(pip install *)",
+      "Bash(python *)",
+      "Bash(PYTHONIOENCODING=utf-8 python download_real_data.py)",
+      "Bash(pip list *)"
+    ]
+  }
+}

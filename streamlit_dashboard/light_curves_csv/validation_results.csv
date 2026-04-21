@@ -1,0 +1,21 @@
+label,truth,verdict,correct,dip_pct,xgboost,random_forest,cnn,feedforward_nn,cleaned_siamese
+Kepler-1b,planet,PLANET,True,0.597,52.1,43.2,63.5,70.2,45.0
+Kepler-7b,planet,no planet,False,0.503,40.3,49.0,55.1,63.9,39.7
+Kepler-12b,planet,PLANET,True,1.517,54.9,34.2,52.6,77.2,43.9
+Kepler-6b,planet,PLANET,True,1.044,51.4,46.7,50.7,71.4,42.0
+Kepler-5b,planet,no planet,False,0.688,31.3,47.7,56.8,71.1,43.1
+Kepler-8b,planet,no planet,False,0.968,75.7,40.8,47.6,69.3,43.8
+Kepler-4b,planet,no planet,False,0.068,84.1,42.8,36.5,58.7,35.5
+Kepler-17b,planet,PLANET,True,0.103,42.4,53.4,50.2,59.9,35.1
+Kepler-14b,planet,no planet,False,0.483,42.0,34.9,30.0,66.8,39.9
+Kepler-3b,planet,no planet,False,0.712,79.7,42.8,45.5,63.2,37.2
+noplanet_kic3427720,no_planet,no planet,True,0.014,68.4,35.4,33.6,58.0,35.8
+noplanet_kic4914923,no_planet,no planet,True,0.014,68.2,33.8,33.4,58.0,35.9
+noplanet_kic6116048,no_planet,no planet,True,0.009,55.5,32.5,31.1,57.9,35.6
+noplanet_kic6603624,no_planet,no planet,True,0.007,31.0,26.1,28.7,57.9,35.5
+noplanet_kic7296438,no_planet,no planet,True,0.02,75.0,40.6,34.4,58.1,35.9
+noplanet_kic8006161,no_planet,PLANET,False,0.074,60.5,39.9,59.9,59.2,38.0
+noplanet_kic8379927,no_planet,PLANET,False,0.153,75.2,45.1,68.3,61.1,36.5
+noplanet_kic9139151,no_planet,no planet,True,0.05,59.8,37.1,46.9,57.8,35.7
+noplanet_kic10644253,no_planet,PLANET,False,0.12,57.3,48.8,64.4,58.8,40.7
+noplanet_kic12069449,no_planet,no planet,True,0.012,48.5,32.0,29.9,57.9,35.7
